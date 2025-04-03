@@ -14,6 +14,7 @@ import {
   IOSConfig,
   withAndroidManifest,
   withEntitlementsPlist,
+  withPodfile,
   withXcodeProject,
 } from "expo/config-plugins";
 
@@ -67,11 +68,30 @@ const withSquareXCodeProject: ConfigPlugin = (config) => {
   });
 };
 
+const withReorderSquareBuildPhase: ConfigPlugin = (config) => {
+  return withPodfile(config, (config) => {
+    const target = config.modRequest.projectName;
+    const regex = new RegExp(`(target '${target}' do.*(?:  end))(\\nend)`, "s");
+
+    config.modResults.contents = config.modResults.contents.replace(
+      regex,
+      "$1\n" +
+        "\n" +
+        "  post_integrate do |installer|\n" +
+        `    system("ruby ../node_modules/square-expo-plugin/scripts/fix-build-phases.rb ${target}.xcodeproj ${target}")\n` +
+        "  end" +
+        "$2"
+    );
+    return config;
+  });
+};
+
 const withSquare: ConfigPlugin<SquarePluginProps> = (config, props) => {
   config = withSquareIos(config, props);
   config = withNoopSwiftFile(config);
   config = withSquareAndroid(config, props);
   config = withSquareXCodeProject(config);
+  config = withReorderSquareBuildPhase(config);
   return config;
 };
 

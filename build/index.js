@@ -31,11 +31,25 @@ const withSquareXCodeProject = (config) => {
         return conf;
     });
 };
+const withReorderSquareBuildPhase = (config) => {
+    return (0, config_plugins_1.withPodfile)(config, (config) => {
+        const target = config.modRequest.projectName;
+        const regex = new RegExp(`(target '${target}' do.*(?:  end))(\\nend)`, "s");
+        config.modResults.contents = config.modResults.contents.replace(regex, "$1\n" +
+            "\n" +
+            "  post_integrate do |installer|\n" +
+            `    system("ruby ../node_modules/square-expo-plugin/scripts/fix-build-phases.rb ${target}.xcodeproj ${target}")\n` +
+            "  end" +
+            "$2");
+        return config;
+    });
+};
 const withSquare = (config, props) => {
     config = withSquareIos(config, props);
     config = (0, exports.withNoopSwiftFile)(config);
     config = withSquareAndroid(config, props);
     config = withSquareXCodeProject(config);
+    config = withReorderSquareBuildPhase(config);
     return config;
 };
 /**
