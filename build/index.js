@@ -1,4 +1,7 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.withNoopSwiftFile = void 0;
 exports.setApplePayEntitlement = setApplePayEntitlement;
@@ -12,6 +15,7 @@ exports.setGooglePayMetaData = setGooglePayMetaData;
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable max-len */
+const expo_build_properties_1 = __importDefault(require("expo-build-properties"));
 const config_plugins_1 = require("expo/config-plugins");
 const { addMetaDataItemToMainApplication, getMainApplicationOrThrow, removeMetaDataItemFromMainApplication, } = config_plugins_1.AndroidConfig.Manifest;
 const pkg = require("react-native-square-in-app-payments/package.json");
@@ -47,6 +51,7 @@ const withReorderSquareBuildPhase = (config) => {
 const withSquare = (config, props = {}) => {
     config = withSquareIos(config, props);
     config = (0, exports.withNoopSwiftFile)(config);
+    config = withSquareMavenUrl(config);
     config = withSquareAndroid(config, props);
     config = withSquareXCodeProject(config);
     config = withReorderSquareBuildPhase(config);
@@ -96,6 +101,13 @@ const withSquareAndroid = (expoConfig, { enableGooglePay = false }) => {
     return (0, config_plugins_1.withAndroidManifest)(expoConfig, (config) => {
         config.modResults = setGooglePayMetaData(enableGooglePay, config.modResults);
         return config;
+    });
+};
+const withSquareMavenUrl = (expoConfig) => {
+    return (0, expo_build_properties_1.default)(expoConfig, {
+        android: {
+            extraMavenRepos: ["https://sdk.squareup.com/public/android"],
+        },
     });
 };
 /**

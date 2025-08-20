@@ -7,6 +7,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable max-len */
+import withBuildProperties from "expo-build-properties";
 import {
   AndroidConfig,
   ConfigPlugin,
@@ -89,6 +90,7 @@ const withReorderSquareBuildPhase: ConfigPlugin = (config) => {
 const withSquare: ConfigPlugin<SquarePluginProps> = (config, props = {}) => {
   config = withSquareIos(config, props);
   config = withNoopSwiftFile(config);
+  config = withSquareMavenUrl(config);
   config = withSquareAndroid(config, props);
   config = withSquareXCodeProject(config);
   config = withReorderSquareBuildPhase(config);
@@ -154,6 +156,14 @@ const withSquareAndroid: ConfigPlugin<SquarePluginProps> = (
     );
 
     return config;
+  });
+};
+
+const withSquareMavenUrl: ConfigPlugin = (expoConfig) => {
+  return withBuildProperties(expoConfig, {
+    android: {
+      extraMavenRepos: ["https://sdk.squareup.com/public/android"],
+    },
   });
 };
 
