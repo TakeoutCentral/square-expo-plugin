@@ -1,6 +1,6 @@
 {
   "name": "square-expo-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "./app.plugin.js",
   "types": "./build/index.d.ts",
   "homepage": "https://github.com/TakeoutCentral/square-expo-plugin",
