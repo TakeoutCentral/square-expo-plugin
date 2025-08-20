@@ -2,7 +2,9 @@
   "name": "square-expo-plugin",
   "version": "1.0.0",
   "main": "./app.plugin.js",
-  "homepage": "",
+  "types": "./build/index.d.ts",
+  "homepage": "https://github.com/TakeoutCentral/square-expo-plugin",
+  "author": "Mike Gray <mike@is.digital>",
   "license": "MIT",
   "scripts": {
     "build": "expo-module build",
@@ -12,14 +14,12 @@
     "prepublishOnly": "expo-module prepublishOnly",
     "expo-module": "expo-module"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "expo": "^52.0.47",
     "react-native-square-in-app-payments": "^1.7.6"
   },
-  "peerDependencies": {
-    "expo": "^52.0.39"
-  },
   "devDependencies": {
-    "expo": "^52.0.39",
+    "expo": "~52.0.47",
     "expo-module-scripts": "^4.0.4",
     "typescript": "^5.8.2"
   },
