@@ -31,13 +31,13 @@ type SquarePluginProps = {
    * The iOS merchant ID used for enabling Apple Pay.
    * Without this, the error "Missing merchant identifier" will be thrown on iOS.
    */
-  merchantIdentifier: string | string[];
-  enableGooglePay: boolean;
+  merchantIdentifier?: string | string[];
+  enableGooglePay?: boolean;
 };
 
 const withSquareIos: ConfigPlugin<SquarePluginProps> = (
   expoConfig,
-  { merchantIdentifier }
+  { merchantIdentifier = [] }
 ) => {
   return withEntitlementsPlist(expoConfig, (config) => {
     config.modResults = setApplePayEntitlement(
