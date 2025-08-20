@@ -15,7 +15,7 @@ exports.setGooglePayMetaData = setGooglePayMetaData;
 const config_plugins_1 = require("expo/config-plugins");
 const { addMetaDataItemToMainApplication, getMainApplicationOrThrow, removeMetaDataItemFromMainApplication, } = config_plugins_1.AndroidConfig.Manifest;
 const pkg = require("react-native-square-in-app-payments/package.json");
-const withSquareIos = (expoConfig, { merchantIdentifier }) => {
+const withSquareIos = (expoConfig, { merchantIdentifier = [] }) => {
     return (0, config_plugins_1.withEntitlementsPlist)(expoConfig, (config) => {
         config.modResults = setApplePayEntitlement(merchantIdentifier, config.modResults);
         return config;
@@ -44,7 +44,7 @@ const withReorderSquareBuildPhase = (config) => {
         return config;
     });
 };
-const withSquare = (config, props) => {
+const withSquare = (config, props = {}) => {
     config = withSquareIos(config, props);
     config = (0, exports.withNoopSwiftFile)(config);
     config = withSquareAndroid(config, props);

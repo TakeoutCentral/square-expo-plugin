@@ -5864,6 +5864,11 @@ react-is@^16.13.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-native-square-in-app-payments@^1.7.6:
+  version "1.7.6"
+  resolved "https://registry.yarnpkg.com/react-native-square-in-app-payments/-/react-native-square-in-app-payments-1.7.6.tgz#9bf098f0ba6eccffdaa4d5ba04f6efc9e25c0ee1"
+  integrity sha512-5UPXwbnCtkAJUcpgDl2s68Bwh+Yhm+LGeNgW17Ywzhxla7pGk71mTuSS/Wu+KbPltbIRK8zDtB39PO9ZO3NA6A==
+
 react-refresh@^0.14.0, react-refresh@^0.14.2:
   version "0.14.2"
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.14.2.tgz"

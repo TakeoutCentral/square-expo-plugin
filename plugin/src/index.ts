@@ -86,7 +86,7 @@ const withReorderSquareBuildPhase: ConfigPlugin = (config) => {
   });
 };
 
-const withSquare: ConfigPlugin<SquarePluginProps> = (config, props) => {
+const withSquare: ConfigPlugin<SquarePluginProps> = (config, props = {}) => {
   config = withSquareIos(config, props);
   config = withNoopSwiftFile(config);
   config = withSquareAndroid(config, props);
