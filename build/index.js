@@ -30,7 +30,16 @@ const withSquareXCodeProject = (config) => {
         const project = conf.modResults;
         project.addBuildPhase([], "PBXShellScriptBuildPhase", "Square Framework Run Script - InAppPaymentsSDK", project.getFirstTarget().uuid, {
             shellPath: "/bin/sh",
-            shellScript: 'FRAMEWORKS="${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}" && "${FRAMEWORKS}/SquareInAppPaymentsSDK.framework/setup"',
+            shellScript: `
+FRAMEWORKS="\${BUILT_PRODUCTS_DIR}/\${FRAMEWORKS_FOLDER_PATH}"
+# Run the setup script
+"\${FRAMEWORKS}/SquareInAppPaymentsSDK.framework/setup"
+# Clean up for App Store compliance
+rm -f "\${FRAMEWORKS}/SquareInAppPaymentsSDK.framework/setup"
+rm -rf "\${FRAMEWORKS}/SquareInAppPaymentsSDK.framework/Frameworks"
+rm -rf "\${FRAMEWORKS}/SquareBuyerVerificationSDK.framework/Frameworks"
+find "\${FRAMEWORKS}" -name "*.bundle" -type d -delete
+`,
         });
         return conf;
     });
