@@ -15,7 +15,7 @@
     "expo-module": "expo-module"
   },
   "dependencies": {
-    "expo-build-properties": "~0.13.3"
+    "expo-build-properties": ">=0.13.3"
   },
   "peerDependencies": {
     "expo": ">=52.0.0",
