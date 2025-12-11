@@ -1,6 +1,6 @@
 {
   "name": "square-expo-plugin",
-  "version": "1.0.5",
+  "version": "2.0.0-beta.0",
   "main": "./app.plugin.js",
   "types": "./build/index.d.ts",
   "homepage": "https://github.com/TakeoutCentral/square-expo-plugin",
@@ -19,12 +19,12 @@
   },
   "peerDependencies": {
     "expo": ">=52.0.0",
-    "react-native-square-in-app-payments": "^1.7.6"
+    "react-native-square-in-app-payments": "^2.0.0"
   },
   "devDependencies": {
-    "expo": "~52.0.47",
-    "expo-module-scripts": "^4.0.4",
-    "react-native-square-in-app-payments": "^1.7.6",
+    "expo": "~54.0.0",
+    "expo-module-scripts": "^5.0.8",
+    "react-native-square-in-app-payments": "^2.0.0",
     "typescript": "^5.8.2"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
